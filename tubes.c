@@ -33,16 +33,21 @@
 #define MEAN_INTERARRIVAL_LOCATION_2 360.0 /* Mean interarrival time of people in location 3. Calculation: (1 / 10) * 3600 */
 #define MEAN_INTERARRIVAL_LOCATION_3 150.0 /* Mean interarrival time of people in location 3. Calculation: (1 / 24) * 3600 */
 
-#define SAMPST_DELAYS_LOCATION_1        1  /* sampst variable for delays in queue of location 1. */
-#define SAMPST_DELAYS_LOCATION_2        2  /* sampst variable for delays in queue of location 2. */
-#define SAMPST_DELAYS_LOCATION_3        3  /* sampst variable for delays in queue of location 3. */
+#define SAMPST_DELAYS_LOCATION_1        1  /* sampst variable for delays in queue of location 1, denoted by number 1. */
+#define SAMPST_DELAYS_LOCATION_2        2  /* sampst variable for delays in queue of location 2, denoted by number 2. */
+#define SAMPST_DELAYS_LOCATION_3        3  /* sampst variable for delays in queue of location 3, denoted by number 3. */
+#define SAMPST_TIME_THE_BUS_IS_STOPPED_AT_LOCATION_1        4  /* sampst variable for time the bus is stopped at location 1, denoted by number 1 + 3. */
+#define SAMPST_TIME_THE_BUS_IS_STOPPED_AT_LOCATION_2        5  /* sampst variable for time the bus is stopped at location 2, denoted by number 2 + 3. */
+#define SAMPST_TIME_THE_BUS_IS_STOPPED_AT_LOCATION_3        6  /* sampst variable for time the bus is stopped at location 3, denoted by number 3 + 3. */
+#define SAMPST_TIME_A_PERSON_IS_IN_THE_SYSTEM_BY_ARRIVAL_LOCATION_1        7  /* sampst variable for time a person is in the system by arrival location 1, denoted by number 1 + 6. */
+#define SAMPST_TIME_A_PERSON_IS_IN_THE_SYSTEM_BY_ARRIVAL_LOCATION_2        8  /* sampst variable for time a person is in the system by arrival location 2, denoted by number 2 + 6. */
+#define SAMPST_TIME_A_PERSON_IS_IN_THE_SYSTEM_BY_ARRIVAL_LOCATION_3        9  /* sampst variable for time a person is in the system by arrival location 3, denoted by number 3 + 6. */
 #define SAMPST_BUS_LOOP        10  /* sampst variable for time for the bus to make a loop (departure from the car rental to the next such departure). */
 
 #define TIMEST_BUS_NUMBER        1  /* timest variable for time for bus capacity. */
 
 /* Declare non-simlib global variables. */
 
-int num_of_people_in_location_3, destination;
 double prob_distrib_destination[26], start_of_loop_time;
 FILE *infile, *outfile;
 
@@ -154,7 +159,7 @@ void init_model(void)  /* Initialization function. */
 
     /* Schedule the arrival of the first person at location 3. */
     transfer[3] = 3; /* Define person's location of arrival */
-    destination = random_integer (prob_distrib_destination, STREAM_DETERMINING_DESTINATION);
+    int destination = random_integer (prob_distrib_destination, STREAM_DETERMINING_DESTINATION);
     transfer[4] = destination; /* Define person destination to location */
     event_schedule (sim_time + expon (MEAN_INTERARRIVAL_LOCATION_3, STREAM_INTERARRIVAL_3), EVENT_PEOPLE_ARRIVAL);
 
@@ -167,14 +172,14 @@ void init_model(void)  /* Initialization function. */
 void people_arrive(void)  /* Arrival event function. */
 {
     int arrival_location = (int)transfer[3];
-    destination = (int)transfer[4];
+    int destination = (int)transfer[4];
 
-    int list_bus_code = LIST_BUS_1;
+    int list_bus = LIST_BUS_1;
 
     if (arrival_location == 2) {
-        list_bus_code = LIST_BUS_2;
+        list_bus = LIST_BUS_2;
     } else if (arrival_location == 3) { /* arrival_location == 3 */
-        list_bus_code = LIST_BUS_3;
+        list_bus = LIST_BUS_3;
     }
 
     int bus_location = 0;
@@ -203,7 +208,7 @@ void people_arrive(void)  /* Arrival event function. */
             list_file(LAST, LIST_LOADING_OR_UNLOADING_ZONE);
 
             transfer[3] = bus_location;
-            transfer[4] = list_bus_code;
+            transfer[4] = list_bus;
             event_schedule (sim_time + uniform (15, 25, STREAM_LOADING_TIMES), EVENT_PEOPLE_ENTER_BUS);
         }
 
@@ -232,16 +237,16 @@ void bus_arrive(void) {
 
     int bus_location = (int)transfer[3];
     printf("TIME: %f \tBUS ARRIVE AT STATION %d\n", sim_time, bus_location);
-    int list_bus_code = LIST_BUS_1;
+    int list_bus = LIST_BUS_1;
 
     if (bus_location == 2) {
-        list_bus_code = LIST_BUS_2;
+        list_bus = LIST_BUS_2;
     } else if (bus_location == 3) { /* bus_location == 3 */
-        list_bus_code = LIST_BUS_3;
+        list_bus = LIST_BUS_3;
     }
 
-    if (list_size[list_bus_code] == 0 && number_of_people_in_bus() == 20) {
-        destination = 1; /* bus_location == 3 */
+    if (list_size[list_bus] == 0 && number_of_people_in_bus() == 20) {
+        int destination = 1; /* bus_location == 3 */
         int bus_duration = BUS_DURATION_FROM_3_TO_1;
         if (bus_location == 1) {
             destination = 2;
@@ -270,8 +275,8 @@ void bus_arrive(void) {
         transfer[3] = bus_location;
         event_schedule (sim_time + 5 * 60, EVENT_BUS_ALREADY_5_MINUTES);
         
-        if (list_size[list_bus_code] > 0) { /* There are people that want to drop off the bus */
-            list_remove(FIRST, list_bus_code);
+        if (list_size[list_bus] > 0) { /* There are people that want to drop off the bus */
+            list_remove(FIRST, list_bus);
 
             timest(number_of_people_in_bus(), TIMEST_BUS_NUMBER);
 
@@ -299,7 +304,7 @@ void people_enter_bus(void) {
 
     list_remove(FIRST, LIST_LOADING_OR_UNLOADING_ZONE);
 
-    destination = (int)transfer[2];
+    int destination = (int)transfer[2];
     if (destination == 2) {
         list_bus = LIST_BUS_2;
     } else if (destination == 3) { /* destination == 3 */
@@ -400,7 +405,7 @@ void bus_5_minutes(void) {
         if (
             list_size[LIST_LOADING_OR_UNLOADING_ZONE] == 0
         ) {
-            destination = 1; /* bus_location == 3 */
+            int destination = 1; /* bus_location == 3 */
             int bus_duration = BUS_DURATION_FROM_3_TO_1;
             if (bus_location == 1) {
                 destination = 2;
