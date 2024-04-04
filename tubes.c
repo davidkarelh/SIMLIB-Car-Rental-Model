@@ -398,8 +398,6 @@ void bus_5_minutes(void) {
         double bus_arrival_time = transfer[2];
 
         if (
-            // (int)transfer[1] == bus_location
-            // && ((list_size[bus_location] == 0 && list_size[list_bus] == 0) || number_of_people_in_bus() == 20)
             list_size[LIST_LOADING_OR_UNLOADING_ZONE] == 0
         ) {
             destination = 1; /* bus_location == 3 */
@@ -458,22 +456,6 @@ void report(void) {
     fprintf(outfile, "Number in Bus\n");
     fprintf(outfile, "\tAverage\t%f\n", transfer[1]);
     fprintf(outfile, "\tMaximum\t%f\n\n", transfer[2]);
-
-    // filest(LIST_BUS_1);
-    // double avg_bus_1 = transfer[1];
-    // double max_bus_1 = transfer[2];
-
-    // filest(LIST_BUS_2);
-    // double avg_bus_2 = transfer[1];
-    // double max_bus_2 = transfer[2];
-
-    // filest(LIST_BUS_3);
-    // double avg_bus_3 = transfer[1];
-    // double max_bus_3 = transfer[2];
-
-    // fprintf(outfile, "Number in Bus\n");
-    // fprintf(outfile, "\tAverage\t%f\n", avg_bus_1 + avg_bus_2 + avg_bus_3);
-    // fprintf(outfile, "\tMaximum\t%f\n\n", 20.0);
 
     fprintf(outfile, "Time the Bus is Stopped at Each Location\n");
     for (int i = 1; i <= 3; i++) {
