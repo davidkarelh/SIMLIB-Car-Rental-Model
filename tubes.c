@@ -73,7 +73,7 @@ int main()  /* Main function. */
     /* Write report heading and input parameters. */
 
     fprintf (outfile, "Car-rental Model\n\n");
-    fprintf (outfile, "Time is in seconds\n\n");
+    fprintf (outfile, "Times are in seconds\n\n");
 
     /* Initialize simlib */
 
@@ -90,7 +90,7 @@ int main()  /* Main function. */
     /* Run the simulation until it terminates after an end-simulation event
      (type EVENT_END_SIMULATION) occurs. */
 
-    printf("TIME IS IN SECONDS\n");
+    printf("TIMES ARE IN SECONDS\n");
 
     do {
 
