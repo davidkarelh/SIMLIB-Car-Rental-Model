@@ -15,8 +15,8 @@
 #define LIST_BUS_1          4  /* List number for queue inside bus for passengers with destination 1. */
 #define LIST_BUS_2          5  /* List number for queue inside bus for passengers with destination 2. */
 #define LIST_BUS_3          6  /* List number for queue inside bus for passengers with destination 3. */
-#define LIST_BUS_LOCATION          7  /* List number for list containing bus current's location. */
-#define LIST_LOADING_OR_UNLOADING_ZONE          8  /* List number for list containing the unloading or loading zone for the passengers. */
+#define LIST_BUS_LOCATION          7  /* List number for list containing bus's current location and arrival time to that location, can only containes either 0 or 1 element. If it is empty, that means the bus is currently on the road. */
+#define LIST_LOADING_OR_UNLOADING_ZONE          8  /* List number for list containing the unloading or loading zone for the passengerscan only containes either 0 or 1 element. If it is empty, that means there is currently nobody being loaded or unloaded. */
 
 #define STREAM_INTERARRIVAL_1   1	/* Random-number stream for interarrivals at location 1. */
 #define STREAM_INTERARRIVAL_2   2	/* Random-number stream for interarrivals at location 2. */
