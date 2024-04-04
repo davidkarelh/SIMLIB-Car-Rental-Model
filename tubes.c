@@ -356,18 +356,19 @@ void people_enter_bus(void) {
 
 void people_leave_bus(void) {
     int bus_location = (int)transfer[3];
-    int list_bus = LIST_BUS_1;
-    if (bus_location == 2) {
-        list_bus = LIST_BUS_2;
-    } else if (bus_location == 3) { /* bus_location == 3 */
-        list_bus = LIST_BUS_3;
-    }
 
     list_remove(FIRST, LIST_LOADING_OR_UNLOADING_ZONE);
     sampst(sim_time - transfer[3], (int)transfer[1] + 6);
 
     printf("TIME: %f \tPEOPLE LEAVE BUS AT STATION %d\n", sim_time, bus_location);
     printf("\t\t\tNUMBER OF BUS PASSENGERS = %d, DEST 1 = %d, DEST 2 = %d, DEST 3 = %d\n", number_of_people_in_bus(), list_size[LIST_BUS_1], list_size[LIST_BUS_2], list_size[LIST_BUS_3]);
+
+    int list_bus = LIST_BUS_1;
+    if (bus_location == 2) {
+        list_bus = LIST_BUS_2;
+    } else if (bus_location == 3) { /* bus_location == 3 */
+        list_bus = LIST_BUS_3;
+    }
 
     if (list_size[list_bus] > 0) {
         list_remove(FIRST, list_bus);
@@ -390,13 +391,6 @@ void people_leave_bus(void) {
 
 void bus_5_minutes(void) {
     int bus_location = (int)transfer[3];
-
-    int list_bus = LIST_BUS_1;
-    if (bus_location == 2) {
-        list_bus = LIST_BUS_2;
-    } else if (bus_location == 3) { /* bus_location == 3 */
-        list_bus = LIST_BUS_3;
-    }
 
     if (list_size[LIST_BUS_LOCATION] > 0) { /* Check if bus is currently in a station */
         list_remove(FIRST, LIST_BUS_LOCATION);
@@ -429,6 +423,13 @@ void bus_5_minutes(void) {
             transfer[2] = bus_arrival_time;
             list_file(LAST, LIST_BUS_LOCATION);
         }
+    }
+
+    int list_bus = LIST_BUS_1;
+    if (bus_location == 2) {
+        list_bus = LIST_BUS_2;
+    } else if (bus_location == 3) { /* bus_location == 3 */
+        list_bus = LIST_BUS_3;
     }
 
     printf("TIME: %f \t5 MINUTES BUS AT STATION %d, QUEUE LENGTH = %d, BUS QUEUE LENGTH = %d\n", sim_time, bus_location, list_size[bus_location], list_size[list_bus]);
