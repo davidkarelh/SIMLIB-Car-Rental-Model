@@ -43,7 +43,7 @@
 /* Declare non-simlib global variables. */
 
 int num_of_people_in_location_3, destination;
-double prob_distrib_job_type[26], start_of_loop_time;
+double prob_distrib_destination[26], start_of_loop_time;
 FILE *infile, *outfile;
 
 /* Declare non-simlib functions. */
@@ -131,9 +131,9 @@ int main()  /* Main function. */
 
 void init_model(void)  /* Initialization function. */
 {
-    prob_distrib_job_type[1] = 0.583;
-    // prob_distrib_job_type[2] = 0.417;
-    prob_distrib_job_type[2] = 1;
+    prob_distrib_destination[1] = 0.583;
+    // prob_distrib_destination[2] = 0.417;
+    prob_distrib_destination[2] = 1;
     start_of_loop_time = 0.0;
 
     /* Note defining attributes beyond the first two for the event record before invoking event_schedule. */
@@ -154,7 +154,7 @@ void init_model(void)  /* Initialization function. */
 
     /* Schedule the arrival of the first person at location 3. */
     transfer[3] = 3; /* Define person's location of arrival */
-    destination = random_integer (prob_distrib_job_type, STREAM_DETERMINING_DESTINATION);
+    destination = random_integer (prob_distrib_destination, STREAM_DETERMINING_DESTINATION);
     transfer[4] = destination; /* Define person destination to location */
     event_schedule (sim_time + expon (MEAN_INTERARRIVAL_LOCATION_3, STREAM_INTERARRIVAL_3), EVENT_PEOPLE_ARRIVAL);
 
@@ -222,7 +222,7 @@ void people_arrive(void)  /* Arrival event function. */
         }
     } else { /* arrival_location == 3 */
         transfer[3] = 3;
-        destination = random_integer (prob_distrib_job_type, STREAM_DETERMINING_DESTINATION);
+        destination = random_integer (prob_distrib_destination, STREAM_DETERMINING_DESTINATION);
         transfer[4] = destination; /* Define person destination to location */
         event_schedule (sim_time + expon (MEAN_INTERARRIVAL_LOCATION_3, STREAM_INTERARRIVAL_3), EVENT_PEOPLE_ARRIVAL);
     }
