@@ -1,6 +1,8 @@
 # Tugas-Besar-1-Pemodelan-dan-Simulasi
 ## Problem Description
 The problem for this SIMLIB model was taken from the Simulation Modeling and Analysis textbook by Averill M. Law, namely from problem number 2.38. In general, a SIMLIB program is needed to simulate a bus trip through 3 places along with dropping off and picking up passengers at these places. Here is the problem:
+![Problem 2.38 Part 1](https://github.com/davidkarelh/Tugas-Besar-1-Pemodelan-dan-Simulasi/blob/main/images/Problem-1.png?raw=true)
+![Problem 2.38 Part 2](https://github.com/davidkarelh/Tugas-Besar-1-Pemodelan-dan-Simulasi/blob/main/images/Problem-2.png?raw=true)
 
 ## Events in Program
 The program created has several events, namely:
