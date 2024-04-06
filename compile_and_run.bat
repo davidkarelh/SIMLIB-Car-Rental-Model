@@ -1,2 +1,2 @@
-gcc simlibdefs.h simlib.c tubes.c -o tubes
-.\tubes
+gcc simlibdefs.h simlib.c model.c -o model
+.\model

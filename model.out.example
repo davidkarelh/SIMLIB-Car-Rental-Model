@@ -1,0 +1,71 @@
+Car-rental Model
+
+Times are in seconds
+
+Number in Each Queue
+	Location 1 Queue
+		Average	7.023617
+		Maximum	24.000000
+
+	Location 2 Queue
+		Average	4.645506
+		Maximum	16.000000
+
+	Location 3 Queue
+		Average	9.008833
+		Maximum	32.000000
+
+Delays in Each Queue
+	Location 1 Queue
+		Average	1696.232090
+		Maximum	5139.133959
+
+	Location 2 Queue
+		Average	1556.039726
+		Maximum	7008.475897
+
+	Location 3 Queue
+		Average	1338.478240
+		Maximum	3817.460224
+
+Number in Bus
+	Average	13.440562
+	Maximum	20.000000
+
+Time the Bus is Stopped at Each Location
+	Location 1
+		Average	399.196417
+		Maximum	626.068304
+		Minimum	196.912052
+
+	Location 2
+		Average	311.060910
+		Maximum	592.264378
+		Minimum	113.765211
+
+	Location 3
+		Average	677.125756
+		Maximum	858.573518
+		Minimum	382.568128
+
+Time for the Bus to Make a Loop (Departure From the Car Rental to the Next Such Departure)
+	Average	2587.383083
+	Maximum	2836.698381
+	Minimum	2196.043470
+
+Time a Person is in the System by Arrival Location
+	Location 1
+		Average	3003.311812
+		Maximum	6328.659101
+		Minimum	1064.307472
+
+	Location 2
+		Average	2626.937920
+		Maximum	8033.678444
+		Minimum	785.559182
+
+	Location 3
+		Average	2451.442552
+		Maximum	5181.672028
+		Minimum	654.851520
+

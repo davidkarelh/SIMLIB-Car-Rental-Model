@@ -67,8 +67,8 @@ int main()  /* Main function. */
 {
     /* Open input and output files. */
 
-    // infile  = fopen("tubes.in",  "r");
-    outfile = fopen("tubes.out", "w");
+    // infile  = fopen("model.in",  "r");
+    outfile = fopen("model.out", "w");
 
     /* Write report heading and input parameters. */
 
