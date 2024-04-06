@@ -54,5 +54,5 @@ Broadly speaking, the program will execute the following algorithm:
 5. The program will close the output file.
  
 ## Notes
-- Even though the problem states "The bus always spend 5 minutes at each location.", the maker of this program created the program such as the program will immediately dispatch the bus to the next location if the number of people in the bus is already full (contains 20 people).
+- Even though the problem states "The bus always spends at least 5 minutes at each location.", the maker of this program created the program such as the program will immediately dispatch the bus to the next location if the number of people in the bus is already full (contains 20 people).
 - This program is created for the course "IF4021 Modeling and Simulation" at Institut Teknologi Bandung.
