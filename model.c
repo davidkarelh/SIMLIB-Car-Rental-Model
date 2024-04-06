@@ -44,7 +44,7 @@
 #define SAMPST_TIME_A_PERSON_IS_IN_THE_SYSTEM_BY_ARRIVAL_LOCATION_3        9  /* sampst variable for time a person is in the system by arrival location 3, denoted by number 3 + 6. */
 #define SAMPST_BUS_LOOP        10  /* sampst variable for time for the bus to make a loop (departure from the car rental to the next such departure). */
 
-#define TIMEST_BUS_NUMBER        1  /* timest variable for time for bus capacity. */
+#define TIMEST_BUS_NUMBER        1  /* timest variable for number of people in the bus. */
 
 /* Declare non-simlib global variables. */
 
